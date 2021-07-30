@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트이벤트위임</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .icon {
+            width: 50px;
+        }
+
+        .icon,
+        .btn-label {
+            /* pointer-events: none; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="menu">
+        <!-- <button class="menu-btn" data-value="1">
+            <img class="icon" src="./images/jenny.png" />
+            <label class="btn-label">제니 1 </label>
+        </button>
+        <button class="menu-btn" data-value="2">
+            <img class="icon" src="./images/jenny.png" />
+            <label class="btn-label">제니 2 </label>
+        </button>
+        <button class="menu-btn" data-value="3">
+            <img class="icon" src="./images/jenny.png" />
+            <label class="btn-label">제니 3 </label>
+        </button> -->
+    </div>
+    <script>
+
+        const menu = document.querySelector(".menu");
+        const clickHandler = (event) => {
+            let element = event.target;
+            while (!element.classList.contains("menu-btn")) {
+                element = element.parentNode;
+                if (element.nodeName == "BODY") {
+                    element = null;
+                    return;
+                }
+            }
+            console.log(element.dataset.value);
+        }
+        menu.addEventListener("click", clickHandler)
+        window.addEventListener("click", () => {
+            const htmlStr = `  
+        <button class="menu-btn" data-value="1">
+            <img class="icon" src="./images/jenny.png" />
+            <label class="btn-label">제니 1 </label>
+        </button>
+        <button class="menu-btn" data-value="2">
+            <img class="icon" src="./images/jenny.png" />
+            <label class="btn-label">제니 2 </label>
+        </button>
+        <button class="menu-btn" data-value="3">
+            <img class="icon" src="./images/jenny.png" />
+            <label class="btn-label">제니 3 </label>
+        </button>`
+            menu.innerHTML = htmlStr;
+        })
+    </script>
+</body>

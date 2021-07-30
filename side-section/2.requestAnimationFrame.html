@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D를 찾아보자</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .jenny {
+            width: 100px;
+            position: absolute;
+            bottom: 0px;
+        }
+
+        .value {
+            text-align: center;
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            font-size: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <img class="jenny" src="./images/jenny.png" alt="jenny" />
+    <div class="value">requstAnimtaionFrame</div>
+
+    <script>
+        const jenny = document.querySelector(".jenny");
+        const value = document.querySelector(".value");
+        let yPos = 0;
+        let rafId;
+
+        const render = () => {
+            value.innerHTML = yPos;
+            jenny.style.transform = `translateY(${-yPos}px)`
+            yPos++;
+            rafId = requestAnimationFrame(render);
+
+            if (yPos > 100) {
+                cancelAnimationFrame(rafId);
+            }
+        }
+        render();
+
+    </script>
+</body>
